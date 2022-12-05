@@ -33,7 +33,9 @@ int RandomNumber(int From, int To) {
 
 string WinnerName(enWinner Winner) {
 
+	cout <<  Winner << endl;
 	string arrWinnerName[3] = { "Player1","Computer","NoWinner" };
+	
 
 	return arrWinnerName[Winner - 1];
 }
@@ -47,15 +49,41 @@ enWinner WhoWonTheRound(stRoundInfo RoundInfo) {
 	switch (RoundInfo.Player1Choice) {
 
 	case enGameChoice::Stone:
+
+	{
 		if (RoundInfo.ComputerChoice == enGameChoice::Paper) {
 
 			return enWinner::Computer;
 		}
 		break;
-
 	}
+
+	case enGameChoice::Paper:
+	{
+		if (RoundInfo.ComputerChoice == enGameChoice::Scissors) {
+
+			return enWinner::Computer;
+		}
+		break;
+	}
+
+	case enGameChoice::Scissors:
+	{
+		if (RoundInfo.ComputerChoice == enGameChoice::Stone) {
+
+			return enWinner::Computer;
+		}
+		break;
+	}
+
+
+}
+
 	//if you reach here then player1 is the winner
 	return enWinner::Player1;
+	
+	
+	
 }
 
 string ChoiceName(enGameChoice Choice) {
@@ -127,7 +155,6 @@ stGameResults FillGameResults(int GameRounds, short Player1WinTimes, short Compu
 
 
 }
-
 enGameChoice ReadPlayer1Choice() {
 
 	short Choice = 1;
@@ -202,7 +229,7 @@ void ShowFinalGameResults(stGameResults GameResults)
 {
  
 	cout << Tabs(2) << "_____________________ [Game Results ]_____________________\n\n";
-	cout << Tabs(2) << "Game Rouds         : " << GameResults.GameRounds << endl;
+	cout << Tabs(2) << "Game Rounds         : " << GameResults.GameRounds << endl;
 	cout << Tabs(2) << "Player1 won times  : " << GameResults.Player1WinTimes << endl;
 	cout << Tabs(2) << "Computer won times : " << GameResults.Computer2WinTimes << endl;
 	cout << Tabs(2) << "Draw times         : " << GameResults.DrawTimes << endl;
